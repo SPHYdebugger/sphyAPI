@@ -9,18 +9,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tasks")
 public class TaskController {
 
     @Autowired
     private TaskService taskService;
 
-    @GetMapping
+    @GetMapping("/tasks")
     public List<Task> getAllTasks() {
         return taskService.getAllTasks();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/tasks/{id}")
     public ResponseEntity<Task> getTaskById(@PathVariable String id) {
         Task task = taskService.getTaskById(id);
         if (task != null) {
@@ -30,7 +29,7 @@ public class TaskController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/tasks")
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
         taskService.addTask(task);
         return ResponseEntity.ok(task);
